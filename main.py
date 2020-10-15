@@ -7,6 +7,7 @@ from vector import Vector
 from numeros import numeros
 
 pygame.init()
+pygame.font.init()
 
 # Colors
 WHITE = (255, 255, 255)
@@ -15,9 +16,6 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 LIGTH_BLUE =(186, 212, 239)
 
-for n in numeros:
-    print(n)
-
 color_fondo = WHITE
 color_linea = BLUE
 color_punto = BLACK
@@ -25,14 +23,18 @@ color_texto = BLACK
 color_graph = RED
 color_grid = LIGTH_BLUE
 
+
 # Variables
 done = False
 vectors = []
 vector_thicknes = 2
-WIDTH, HEIGHT = 2700, 300
+WIDTH, HEIGHT = 1200, 300
 ORIGEN = (int(WIDTH/2), int(HEIGHT/2))
 text_font_size = 30
 zoom = 100
+
+myfont = pygame.font.SysFont('Comic Sans MS', 10)
+
 
 # Crea el TextInput-object
 textinput = pygame_textinput.TextInput(font_size=text_font_size)
@@ -41,7 +43,16 @@ textinput.set_cursor_color(color_texto)
 text_margen_x = 10
 text_margen_y = 25
 
-# Display propertyes
+# Dibuja el texto
+def draw_num_text():
+    global numeros
+    for n in numeros:
+        posx = ajustar_punto_en_x(n)
+        texto = str(n[1])
+        textsurface = myfont.render(texto, False, (0, 0, 0))
+        screen.blit(textsurface,(posx, ORIGEN[1]))
+
+# Display properties
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('six bite graficator by: CotherArt')
 clock = pygame.time.Clock()
@@ -65,16 +76,19 @@ def draw_vectores():
             pygame.draw.line(screen, color_linea, ORIGEN, end_pos, vector_thicknes)
             pygame.draw.circle(screen, color_punto, end_pos, 2)
 
+# Ajustar el numero a la cuadricula
+def ajustar_punto_en_x(numero):
+    global zoom
+    punto_en_x = numero[1] * zoom
+    punto_en_x = int(punto_en_x + ORIGEN[0])
+    return punto_en_x
+
 # Dibuja los numeros el la pantalla
 def draw_numeros():
-    global zoom
     global numeros
+
     for n in numeros:
-        punto_en_x = n[1] * zoom
-        
-
-        punto_en_x = int(punto_en_x + ORIGEN[0])
-
+        punto_en_x = ajustar_punto_en_x(n)
         if n[1] == 14 or n[1] == -14:
             pygame.draw.line(screen, RED, (punto_en_x, 0), (punto_en_x, HEIGHT), 1)
         else:
@@ -100,6 +114,7 @@ def add_vector_text(text):
     
     add_vector(cordenadas)
 
+# Dibuja la cuadricula
 def draw_cuadricula():
     blockSize = 20 #Set the size of the grid block
     for x in range(10, WIDTH, 10):
@@ -112,19 +127,21 @@ def zoominout(num):
     zoom = num
 
 # Main loop
-while not done:
-    screen.fill(color_fondo)
-    
+while True:
     events = pygame.event.get()
     for event in events:
         if event.type == pygame.QUIT:
-            done = True
+            pygame.quit()
+            sys.exit()
     
+
     # Dibujar los elementos en la pantalla
+    screen.fill(color_fondo)
     draw_cuadricula()
     draw_ejes()
     draw_vectores()
     draw_numeros()
+    draw_num_text()
 
     # Text input events
     if textinput.update(events):
