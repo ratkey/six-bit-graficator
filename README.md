@@ -2,8 +2,6 @@
 Author: CotherArt
 
 ## Description
-Grafica en una recta numerica decimal todos los numeros que puede guardar una computadora imaginaria de 6 bits.
-
 This program shows in a decimal base numeric line, all the numbers that a imaginary base 6 bit computer can store.
 
 ## Setup
