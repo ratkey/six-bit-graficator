@@ -19,4 +19,7 @@ zoom 4
 ```
 
 ## Screenshots
+### Zoom 2
 ![Screenshot](screenshots/zoom2.png)
+### Zoom 3
+![Screenshot](screenshots/zoom3.png)
