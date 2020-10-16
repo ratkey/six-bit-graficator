@@ -17,3 +17,6 @@ zoom 2
 zoom 3
 zoom 4
 ```
+
+## Screenshots
+![Screenshot](screenshots/.zoom2.png)

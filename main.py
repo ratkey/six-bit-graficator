@@ -33,7 +33,7 @@ ORIGEN = (int(WIDTH/2), int(HEIGHT/2))
 text_font_size = 30
 zoom = 100
 
-myfont = pygame.font.SysFont('Comic Sans MS', 10)
+myfont = pygame.font.SysFont('Consolas', 15)
 
 
 # Crea el TextInput-object
@@ -47,14 +47,14 @@ text_margen_y = 25
 def draw_num_text():
     global numeros
     for n in numeros:
-        posx = ajustar_punto_en_x(n)
+        posx = ajustar_punto_en_x(n) + 2
         texto = str(n[1])
-        textsurface = myfont.render(texto, False, (0, 0, 0))
-        screen.blit(textsurface,(posx, ORIGEN[1]))
+        textsurface = myfont.render(texto, True, BLACK, None)
+        screen.blit(textsurface,(posx, ORIGEN[1] + 2))
 
 # Display properties
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('six bite graficator by: CotherArt')
+pygame.display.set_caption('six bit graficator by: CotherArt')
 clock = pygame.time.Clock()
 
 def position_conversor(punto):
