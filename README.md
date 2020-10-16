@@ -19,4 +19,4 @@ zoom 4
 ```
 
 ## Screenshots
-![Screenshot](screenshots/.zoom2.png)
+![Screenshot](screenshots/zoom2.png)
