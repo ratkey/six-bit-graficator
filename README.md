@@ -10,7 +10,7 @@ pip install pygame
 ```
 
 ## Usage
-This are the various commands you can use directly on the creen:
+These are the various commands you can use directly on the creen:
 ```
 zoom 1
 zoom 2
